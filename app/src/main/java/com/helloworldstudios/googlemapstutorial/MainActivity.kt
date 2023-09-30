@@ -7,17 +7,17 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.getSystemService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
 import com.helloworldstudios.googlemapstutorial.databinding.ActivityMainBinding
 import java.util.Locale
 
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        System.getProperty("GMP_KEY")?.let { Places.initialize(this@MainActivity, it) }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.maps) as SupportMapFragment
